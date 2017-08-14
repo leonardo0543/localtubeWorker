@@ -107,7 +107,8 @@ function downloadAudio(ch,msg) {
     var exec = require('child_process').exec;
    
     var command = 'ffmpeg -y -i \"'+localPath+'.mp4\" -q:a 0 -map a \"'+localPath+'.mp3\"';
-    console.log(command);
+    console.log('Extracting audio');
+    insert("Extracting audio")
     exec(command, function(error, stdout, stderr) {
               if(error) {
                 insert("Wrong");
@@ -130,7 +131,7 @@ function downloadVideo(ch,msg) {
     insert("Prosesing");
     console.log("Prosesing");
     console.log(isVideo);
-    if(isVideo=="TRUE")
+    if(isVideo=="true")
     {
       
       downloadSplit(localPath+".mp4",localPath+"%03d.mp4","mp4",ch,msg);
@@ -178,14 +179,16 @@ function downloadSplit(localPath,localPathdiv,extencion,ch,msg) {
   if(splitTime>0)
   {
     command = "ffmpeg -y -i \""+localPath+"\" -c copy -map 0 -segment_time "+(splitTime)+" -f segment \""+localPathdiv+"\"";
-    console.log(command);
+    console.log('Spliting');
+    insert("Spliting")
   }
   else
   {
     if(splitPart>0)
     {
     command = "ffmpeg -y -i \""+localPath+"\" -c copy -map 0 -segment_time "+(dur/splitPart)+" -f segment \""+localPathdiv+"\"";
-    console.log(command);
+    console.log('Spliting');
+    insert("Spliting")
     }
     else{
         var name =__dirname+"/"+title;
@@ -202,7 +205,7 @@ function downloadSplit(localPath,localPathdiv,extencion,ch,msg) {
                 name =name.replace(/\;/g, "\\;");
                 name =name.replace(/\&/g, "\\&");
                 name =name.replace(/\"/g, "\\\"");
-       execCommand("mv "+name+"."+extencion+"  /home/jose/Downloads/",ch,msg)
+       execCommand("mv "+name+"."+extencion+"  /home/carlos/Downloads/",ch,msg)
       return;
     }
   }
@@ -231,7 +234,7 @@ function downloadSplit(localPath,localPathdiv,extencion,ch,msg) {
                 name =name.replace(/\;/g, "\\;");
                 name =name.replace(/\&/g, "\\&");
                 name =name.replace(/\"/g, "\\\"");
-                execCommand("mv "+name+"?*"+extencion+"  /home/jose/Downloads/",ch,msg)
+                execCommand("mv "+name+"?*"+extencion+"  /home/carlos/Downloads/",ch,msg)
               }
               });
 
